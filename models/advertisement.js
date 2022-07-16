@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-let addSchema = new Schema(
+let adSchema = new Schema(
     {
         title : String,
         description : String,
         location : String,
-        price : String,
-        User  :{
-            type:Schema.Types.ObjectId,
-            ref: "User"
+        price: Number,
+        User: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: false
         }
    },
-
    {
-    collections : "Advertisement"
+    collection: "Advertisement"
    }
 );
 
-module.exports =mongoose.model("Advertisement",addSchema);
+module.exports = mongoose.model("Advertisement", adSchema);

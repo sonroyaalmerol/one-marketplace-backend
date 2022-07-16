@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-let AddController = require('../controller/advertisement');
+let AdvertisementController = require('../controller/advertisement');
 
-router.get('/add',AddController.AddList);
-
-router.get('/edit/:id', AddController.displayEditPage);
-router.post('/edit/:id', AddController.processEditPage);
+router.get('/', AdvertisementController.getAllAdvertisements);
+router.get('/:id', AdvertisementController.getAdvertisement);
+router.post('/', AdvertisementController.addAdvertisement);
+router.put('/:id', AdvertisementController.editAdvertisement);
+router.delete('/:id', AdvertisementController.deleteAdvertisement);
 
 
 module.exports = router;
