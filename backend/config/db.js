@@ -1,18 +1,22 @@
-// Do not expose your credentials in your code.
-let atlasDB = "mongodb+srv://tibirabotto:t1b2r3a4@cluster0.nqkyx.mongodb.net/test?retryWrites=true&w=majority";
+//username - project password - marketplace
+//mongodb+srv://project:<password>@cluster-project.y1tuk.mongodb.net/test
 
-// Database setup
+let proDB = "mongodb+srv://project:marketplace@cluster-project.y1tuk.mongodb.net/?retryWrites=true&w=majority";
+
+const { MongoServerClosedError } = require('mongodb');
 let mongoose = require('mongoose');
 
-module.exports = function(){
+module.exports = function()
+{
+    MongoServerClosedError.connect(proDB);
 
-    mongoose.connect(atlasDB);
-    let mongodb = mongoose.connection;
+    let marketDb = mongoose.connection;
 
-    mongodb.on('error', console.error.bind(console, 'Connection Error:'));
-    mongodb.once('open', ()=>{
-        console.log('===> Connected to MongoDB.');
-    })
+    marketDb.on('eror' , console.error.bind(console, 'Connection Error:'));
+    marketDb.once('open' ,() => 
+    {
+        console.log('Connected to MarketDb');
+    });
 
-    return mongodb;
+    return marketDb;
 }
