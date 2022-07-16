@@ -21,16 +21,16 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+client/.vscode/*
+!client/.vscode/settings.json
+!client/.vscode/tasks.json
+!client/.vscode/launch.json
+!client/.vscode/extensions.json
 .history/*
 
 # Miscellaneous
-.angular/cache
-.sass-cache/
+client/.angular/cache
+client/.sass-cache
 connect.lock
 coverage
 libpeerconnection.log
