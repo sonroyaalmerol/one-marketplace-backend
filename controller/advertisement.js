@@ -1,5 +1,3 @@
-const { render } = require('ejs');
-
 let AddModel = require('../models/advertisement');
 
 module.exports.AddList = function(req,re,next)
@@ -69,7 +67,6 @@ module.exports.processEditPage = (req, res, next) => {
         if(err)
         {
             console.log(err);
-            render.end(err);
         }
         else 
         {

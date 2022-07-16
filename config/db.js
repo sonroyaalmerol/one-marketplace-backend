@@ -3,12 +3,11 @@
 
 let proDB = "mongodb+srv://project:marketplace@cluster-project.y1tuk.mongodb.net/?retryWrites=true&w=majority";
 
-const { MongoServerClosedError } = require('mongodb');
 let mongoose = require('mongoose');
 
 module.exports = function()
 {
-    MongoServerClosedError.connect(proDB);
+    mongoose.connect(proDB);
 
     let marketDb = mongoose.connection;
 
