@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
+
 
 var indexRouter = require('../routes/index');
 // var usersRouter = require('./routes/users');
@@ -11,24 +13,10 @@ var advertisementRouter = require('../routes/advertisement');
 var dbConfig = require('./db');
 var app = express();
 
-let db = dbConfig();
-
 // api cors fix
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested, Content-Type, Accept Authorization"
-  )
-  if (req.method === "OPTIONS") {
-    res.header(
-      "Access-Control-Allow-Methods",
-      "POST, PUT, PATCH, GET, DELETE"
-    )
-    return res.status(200).json({})
-  }
-  next()
-})
+app.use(cors());
+
+let db = dbConfig();
 
 app.use(logger('dev'));
 app.use(express.json());

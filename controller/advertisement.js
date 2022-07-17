@@ -60,16 +60,11 @@ module.exports.addAdvertisement = (req, res, next) => {
         location: req.body.location,
         description: req.body.description,
         price: req.body.price
-    }, (err, ad) =>{
-        if(err)
-        {
-            console.log(err);
-            res.status(500).json({ error: err });
-        }
-        else
-        {
-            res.status(200).json(ad);
-        }
+    }).then((ad) => {
+        res.status(200).json(ad);
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err });
     });
 }
 
