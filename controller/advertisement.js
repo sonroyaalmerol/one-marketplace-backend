@@ -26,7 +26,7 @@ module.exports.getAdvertisement = (req, res, next) => {
             res.status(500).json({ error: err });
         }
         else {
-            res.status(200).json(ads);
+            res.status(200).json(ad);
         }
 
     });
