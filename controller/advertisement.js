@@ -6,11 +6,11 @@ module.exports.getAllAdvertisements = function(req,res,next)
     {
         if(err)
         {
-            res.send({ error: err });
+            res.status(500).json({ error: err });
         }
         else
         {
-            res.send(ads);
+            res.status(200).json(ads);
         }
     });
 }
@@ -23,11 +23,10 @@ module.exports.getAdvertisement = (req, res, next) => {
         if(err)
         {
             console.log(err);
-            res.send({ error: err });
+            res.status(500).json({ error: err });
         }
         else {
-            //show edit page 
-            res.send(ads);
+            res.status(200).json(ads);
         }
 
     });
@@ -45,12 +44,12 @@ module.exports.editAdvertisement = (req, res, next) => {
     }, (err, ad) =>{
         if(err)
         {
-            res.send({ error: err });
+            res.status(500).json({ error: err });
             console.log(err);
         }
         else 
         {
-            res.send(ad);
+            res.status(200).json(ad);
         }
     });
 }
@@ -65,11 +64,11 @@ module.exports.addAdvertisement = (req, res, next) => {
         if(err)
         {
             console.log(err);
-            res.send({ error: err });
+            res.status(500).json({ error: err });
         }
         else
         {
-            res.send(ad);
+            res.status(200).json(ad);
         }
     });
 }
@@ -82,11 +81,11 @@ module.exports.deleteAdvertisement = (req, res, next) => {
         if(err)
         {
             console.log(err);
-            res.send({ error: err });
+            res.status(500).json({ error: err });
         }
         else
         {
-            res.send(ad);
+            res.status(200).json(ad);
         }
     });
 }

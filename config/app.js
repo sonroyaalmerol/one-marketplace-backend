@@ -13,21 +13,6 @@ var app = express();
 
 let db = dbConfig();
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-app.use('/advertisements', advertisementRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
 // api cors fix
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
@@ -44,6 +29,22 @@ app.use((req, res, next) => {
   }
   next()
 })
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+app.use('/advertisements', advertisementRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
 
 // error handler
 app.use(function(err, req, res, next) {
