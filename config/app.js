@@ -11,6 +11,7 @@ let usersRouter = require('../routes/users');
 var advertisementRouter = require('../routes/advertisement');
 
 var dbConfig = require('./db');
+const passport = require('passport');
 var app = express();
 
 // api cors fix
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

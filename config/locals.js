@@ -6,13 +6,12 @@ const User = require('../models/user');
 
 let config = require('./config');
 
-module.exports = function() {
+module.exports = function () {
     console.log('====> LocalStrategy function')
 
     passport.use(
         'tokencheck',
-        new JWTstrategy(
-            {
+        new JWTstrategy({
                 secretOrKey: config.SECRETKEY,
                 jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
             },
@@ -29,25 +28,27 @@ module.exports = function() {
     );
 
     passport.use(
-        'login', 
-        new LocalStrategy((username, password, done)=>{
-            User.findOne({username: username}, (err, user)=>{
+        'login',
+        new LocalStrategy((username, password, done) => {
+            User.findOne({
+                username: username
+            }, (err, user) => {
                 if (err) {
                     return done(err);
                 }
-                
+
                 if (!user) {
                     return done(null, false, {
                         message: 'Unknown user'
                     });
                 }
-        
+
                 if (!user.authenticate(password)) {
                     return done(null, false, {
                         message: 'Invalid password'
                     });
                 }
-                
+
                 return done(null, user);
             });
         })

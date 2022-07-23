@@ -1,13 +1,12 @@
 //username - project password - marketplace
 //mongodb+srv://project:<password>@cluster-project.y1tuk.mongodb.net/test
-
-let proDB = "mongodb+srv://project:marketplace@cluster-project.y1tuk.mongodb.net/project?retryWrites=true&w=majority";
+const config = require('./config');
 
 let mongoose = require('mongoose');
 
 module.exports = function()
 {
-    mongoose.connect(proDB, {
+    mongoose.connect(config.ATLASDB, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });

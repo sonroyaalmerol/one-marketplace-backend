@@ -7,7 +7,7 @@ let adSchema = new Schema(
         description : String,
         location : String,
         price: Number,
-        User: {
+        user: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: false
