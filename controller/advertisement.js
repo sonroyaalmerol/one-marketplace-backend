@@ -1,4 +1,4 @@
-let Advertisement = require('../models/advertisement');
+const Advertisement = require('../models/advertisement');
 
 module.exports.getAllAdvertisements = function(req,res,next)
 {

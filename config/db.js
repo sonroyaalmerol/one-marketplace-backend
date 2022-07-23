@@ -2,7 +2,7 @@
 //mongodb+srv://project:<password>@cluster-project.y1tuk.mongodb.net/test
 const config = require('./config');
 
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 module.exports = function()
 {

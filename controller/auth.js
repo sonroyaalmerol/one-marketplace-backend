@@ -1,6 +1,6 @@
-let passport = require('passport');
-let Advertisement = require('../models/advertisement');
-let UserModel = require('../models/user');
+const passport = require('passport');
+const Advertisement = require('../models/advertisement');
+const UserModel = require('../models/user');
 
 function getErrorMessage(err) {
   if (err.errors) {

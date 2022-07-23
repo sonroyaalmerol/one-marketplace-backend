@@ -1,23 +1,23 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
 
 
-var indexRouter = require('../routes/index');
-let usersRouter = require('../routes/users');
-var advertisementRouter = require('../routes/advertisement');
+const indexRouter = require('../routes/index');
+const usersRouter = require('../routes/users');
+const advertisementRouter = require('../routes/advertisement');
 
-var dbConfig = require('./db');
+const dbConfig = require('./db');
 const passport = require('passport');
-var app = express();
+const app = express();
 
 // api cors fix
 app.use(cors());
 
-let db = dbConfig();
+dbConfig();
 
 app.use(logger('dev'));
 app.use(express.json());

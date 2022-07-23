@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-let AdvertisementController = require('../controller/advertisement');
+const AdvertisementController = require('../controller/advertisement');
 
 router.get('/', AdvertisementController.getAllAdvertisements);
 router.get('/:id', AdvertisementController.getAdvertisement);

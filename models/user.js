@@ -1,8 +1,7 @@
-let mongoose = require('mongoose');
-let crypto = require('crypto');
-let Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const crypto = require('crypto');
 
-let UserSchema = mongoose.Schema(
+const UserSchema = mongoose.Schema(
     {
         firstName: String,
         lastName: String,

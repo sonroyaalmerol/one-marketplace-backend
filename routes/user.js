@@ -1,17 +1,12 @@
-let express = require('express');
-let router = express.Router();
-let usersController = require('../controllers/user');
-let passport = require('passport');
+const express = require('express');
+const router = express.Router();
+const usersController = require('../controller/user');
+const authController = require('../controller/auth');
 
 // Routes for sign-up
-router.get('/signup', usersController.renderSignup);
-router.post('/signup', usersController.signup);
+router.post('/register', usersController.register);
 
 // Routes for sign-in
-router.get('/signin', usersController.renderSignin);
-router.post('/signin', usersController.signin);
-
-// Route for sign-out
-router.get('/signout', usersController.signout);
+router.post('/signin', usersController.signIn);
 
 module.exports = router;
