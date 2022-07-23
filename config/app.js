@@ -7,7 +7,7 @@ const cors = require('cors');
 
 
 const indexRouter = require('../routes/index');
-const usersRouter = require('../routes/users');
+const usersRouter = require('../routes/user');
 const advertisementRouter = require('../routes/advertisement');
 
 const dbConfig = require('./db');
