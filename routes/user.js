@@ -9,4 +9,6 @@ router.post('/register', usersController.register);
 // Routes for sign-in
 router.post('/signin', usersController.signIn);
 
+router.get('/self', authController.requireAuth, usersController.getSelf);
+
 module.exports = router;
