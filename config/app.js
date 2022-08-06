@@ -9,6 +9,7 @@ const cors = require('cors');
 const indexRouter = require('../routes/index');
 const usersRouter = require('../routes/user');
 const advertisementRouter = require('../routes/advertisement');
+const rateRouter = require('../routes/rate');
 
 const dbConfig = require('./db');
 const passport = require('passport');
@@ -29,6 +30,7 @@ app.use(passport.initialize());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/advertisements', advertisementRouter);
+app.use('/rates', rateRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
