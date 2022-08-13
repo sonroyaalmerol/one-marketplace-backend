@@ -1,8 +1,8 @@
-const Rate = require('../models/advertisement');
+const Rating = require('../models/rate');
 
-module.exports.getAllAdvertisements = function(req,res,next)
+module.exports.getAllRatings = function(req,res,next)
 {
-    Rate.find((err, rates) => 
+    Rating.find((err, rates) => 
     {
         if(err)
         {
@@ -15,10 +15,10 @@ module.exports.getAllAdvertisements = function(req,res,next)
     });
 }
 
-module.exports.getRate = (req, res, next) => {
+module.exports.getRating = (req, res, next) => {
     let id = req.params.id;
 
-    Rate.findById(id, (err, rate) =>{
+    Rating.findById(id, (err, rate) =>{
 
         if(err)
         {
@@ -33,10 +33,10 @@ module.exports.getRate = (req, res, next) => {
 
 }
 
-module.exports.editRate = (req, res, next) => {
+module.exports.editRating = (req, res, next) => {
     let id = req.params.id;
 
-    Rate.findByIdAndUpdate(id, {
+    Rating.findByIdAndUpdate(id, {
         ratingOutOfFive: req.body.ratingOutOfFive,
         comment: req.body.comment
     }, (err, rate) =>{
@@ -52,8 +52,8 @@ module.exports.editRate = (req, res, next) => {
     });
 }
 
-module.exports.addRate = (req, res, next) => {
-    Rate.create({
+module.exports.addRating = (req, res, next) => {
+    Rating.create({
         ratingOutOfFive: req.body.ratingOutOfFive,
         comment: req.body.comment
     }).then((rate) => {
@@ -64,11 +64,11 @@ module.exports.addRate = (req, res, next) => {
     });
 }
 
-module.exports.deleteRate = (req, res, next) => {
+module.exports.deleteRating = (req, res, next) => {
     
     let id = req.params.id;
 
-    Rate.findByIdAndDelete(id, (err, ad) => {
+    Rating.findByIdAndDelete(id, (err, rate) => {
         if(err)
         {
             console.log(err);
