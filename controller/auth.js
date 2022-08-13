@@ -33,6 +33,18 @@ exports.requireAuth = function (req, res, next) {
   })(req, res, next);
 }
 
+exports.optionalAuth = function (req, res, next) {
+  passport.authenticate('tokencheck', {
+    session: false
+  }, function (err, user, info) {
+    if (!err && !info) {
+      req.payload = user;
+    }
+    
+    next();
+  })(req, res, next);
+}
+
 exports.isOwner = async function (req, res, next) {
   try {
     let id = req.params.id;
@@ -45,8 +57,7 @@ exports.isOwner = async function (req, res, next) {
       if (user === null) {
         throw new Error('Item not found'); // Express catches the error.
       }
-
-      if (user._id !== req.payload.id) {
+      if (user._id.toString() !== req.payload.id) {
         return res.status(403).json({
           success: false,
           message: 'User is not authorized to modify this item.'
@@ -54,7 +65,7 @@ exports.isOwner = async function (req, res, next) {
       }
     } else if (advertisement.user != null) { // Item has a owner
 
-      if (advertisement.user._id != req.payload.id) {
+      if (advertisement.user._id.toString() != req.payload.id) {
 
         let currentUser = await UserModel.findOne({
           _id: req.payload.id

@@ -88,7 +88,7 @@ module.exports.getUserAdvertisements = function(req,res,next)
 {
   let id = req.params.id;
 
-  if (id !== req.payload.id) {
+  if (id !== req.payload?.id) {
     Advertisement.find({ 
       user: id, 
       expiresAt: { $gt: new Date() },
