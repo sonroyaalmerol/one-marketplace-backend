@@ -20,6 +20,7 @@ router.get('/:id/questions/:questionId', QuestionController.getQuestion);
 router.post('/:id/questions', QuestionController.addQuestion);
 router.delete('/:id/questions/:questionId', authController.requireAuth, authController.isOwner, QuestionController.deleteQuestion);
 
+router.get('/:id/questions/:questionId/answer', QuestionController.getAnswer);
 router.post('/:id/questions/:questionId/answer', authController.requireAuth, authController.isOwner, QuestionController.addAnswer);
 router.put('/:id/questions/:questionId/answer', authController.requireAuth, authController.isOwner, QuestionController.editAnswer);
 router.delete('/:id/questions/:questionId/answer', authController.requireAuth, authController.isOwner, QuestionController.deleteAnswer);

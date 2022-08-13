@@ -49,7 +49,28 @@ module.exports.deleteQuestion = (req, res, next) => {
     });
 }
 
+module.exports.getAnswer = (req, res, next) => {
+    let advId = req.params.id;
+    let id = req.params.questionId;
 
+    Question.findOne({ _id: id, advertisement: advId }, (err, question) =>{
+        if(err)
+        {
+            console.log(err);
+            return res.status(500).json({ error: err });
+        }
+        else {
+            Answer.findById(question.answer, (err, answer) => {
+                if (err) {
+                    return res.status(500).json({ error: err });
+                }
+                
+                return res.status(200).json(answer);
+            });
+        }
+
+    });
+}
 
 module.exports.editAnswer = (req, res, next) => {
     let advId = req.params.id;
