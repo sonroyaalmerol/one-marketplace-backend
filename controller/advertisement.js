@@ -76,7 +76,10 @@ module.exports.editAdvertisement = (req, res, next) => {
         title: req.body.title,
         description: req.body.description,
         location: req.body.location,
-        price: req.body.price
+        price: req.body.price,
+        category: req.body.category,
+        disabled: req.body.disabled,
+        expiresAt: req.body.expiresAt
     }, (err, ad) =>{
         if(err)
         {
@@ -96,7 +99,9 @@ module.exports.addAdvertisement = (req, res, next) => {
         location: req.body.location,
         description: req.body.description,
         price: req.body.price,
-        user: req.payload._id
+        category: req.body.category,
+        user: req.payload._id,
+        expiresAt: req.body.expiresAt
     }).then((ad) => {
         return res.status(200).json(ad);
     }).catch((err) => {

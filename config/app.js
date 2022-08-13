@@ -9,7 +9,6 @@ const cors = require('cors');
 const indexRouter = require('../routes/index');
 const usersRouter = require('../routes/user');
 const advertisementRouter = require('../routes/advertisement');
-const questionRouter = require('../routes/question');
 const categoryRouter = require('../routes/category');
 
 const dbConfig = require('./db');
@@ -31,7 +30,6 @@ app.use(passport.initialize());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/advertisements', advertisementRouter);
-app.use('/questions', questionRouter);
 app.use('/categories', categoryRouter);
 
 // catch 404 and forward to error handler
