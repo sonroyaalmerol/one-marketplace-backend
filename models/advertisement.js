@@ -12,6 +12,11 @@ let adSchema = new Schema(
             type: Boolean,
             default: false
         },
+        category: {
+            type: Schema.Types.ObjectId,
+            ref: "Category",
+            required: false
+        },
         user: {
             type: Schema.Types.ObjectId,
             ref: "User",
