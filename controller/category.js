@@ -88,7 +88,14 @@ module.exports.getAddCategory = (req, res, next) => {
     Advertisement.find({
         category: id,
         expiresAt: { $gt: new Date() },
-        disabled: false
+        $or: [
+            {
+                disabled: false
+            },
+            {
+                disabled: null
+            }
+        ]
     }, (err, advertisements) =>{
         if(err)
         {

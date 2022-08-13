@@ -5,7 +5,14 @@ module.exports.getAllNonExpiredAdvertisements = function(req,res,next)
 {
     Advertisement.find({
         expiresAt: { $gt: new Date() },
-        disabled: false
+        $or: [
+            {
+                disabled: false
+            },
+            {
+                disabled: null
+            }
+        ]
     }, (err, ads) => 
     {
         if(err)
@@ -18,6 +25,37 @@ module.exports.getAllNonExpiredAdvertisements = function(req,res,next)
         }
     });
 }
+
+module.exports.getSearchAdvertisements = function(req,res,next)
+{
+    let searchString = req.query.query;
+
+    console.log(searchString)
+
+    Advertisement.find({
+        $text: { $search: searchString },
+        expiresAt: { $gt: new Date() },
+        $or: [
+            {
+                disabled: false
+            },
+            {
+                disabled: null
+            }
+        ]
+    }, (err, ads) => 
+    {
+        if(err)
+        {
+            return res.status(500).json({ error: err });
+        }
+        else
+        {
+            return res.status(200).json(ads);
+        }
+    });
+}
+
 module.exports.getAllAnsweredQuestions = function(req,res,next)
 {
     let id = req.params.id;
@@ -100,7 +138,7 @@ module.exports.addAdvertisement = (req, res, next) => {
         description: req.body.description,
         price: req.body.price,
         category: req.body.category,
-        user: req.payload._id,
+        user: req.payload.id,
         expiresAt: req.body.expiresAt
     }).then((ad) => {
         return res.status(200).json(ad);

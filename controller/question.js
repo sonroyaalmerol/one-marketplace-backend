@@ -22,7 +22,7 @@ module.exports.addQuestion = (req, res, next) => {
     let id = req.params.id;
 
     Question.create({
-        title: req.body.title,
+        content: req.body.content,
         advertisement: id
     }).then((question) => {
         return res.status(200).json(question);

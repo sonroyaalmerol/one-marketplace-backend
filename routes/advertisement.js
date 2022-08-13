@@ -7,6 +7,7 @@ const QuestionController = require('../controller/question');
 const AdvertisementController = require('../controller/advertisement');
 
 router.get('/', AdvertisementController.getAllNonExpiredAdvertisements);
+router.get('/search', AdvertisementController.getSearchAdvertisements);
 router.get('/:id', AdvertisementController.getAdvertisement);
 router.post('/', authController.requireAuth, AdvertisementController.addAdvertisement);
 router.put('/:id', authController.requireAuth, authController.isOwner, AdvertisementController.editAdvertisement);

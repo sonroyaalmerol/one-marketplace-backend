@@ -87,17 +87,43 @@ module.exports.register = function (req, res, next) {
 module.exports.getUserAdvertisements = function(req,res,next)
 {
   let id = req.params.id;
-  Advertisement.find({ user: id }, (err, ads) => 
-  {
-      if(err)
-      {
-        return res.status(500).json({ error: err });
-      }
-      else
-      {
-        return res.status(200).json(ads);
-      }
-  });
+
+  if (id !== req.payload.id) {
+    Advertisement.find({ 
+      user: id, 
+      expiresAt: { $gt: new Date() },
+      $or: [
+        {
+            disabled: false
+        },
+        {
+            disabled: null
+        }
+      ]
+    }, (err, ads) => 
+    {
+        if(err)
+        {
+          return res.status(500).json({ error: err });
+        }
+        else
+        {
+          return res.status(200).json(ads);
+        }
+    });
+  } else {
+    Advertisement.find({ user: id }, (err, ads) => 
+    {
+        if(err)
+        {
+          return res.status(500).json({ error: err });
+        }
+        else
+        {
+          return res.status(200).json(ads);
+        }
+    });
+  }
 }
 
 module.exports.signIn = function (req, res, next) {

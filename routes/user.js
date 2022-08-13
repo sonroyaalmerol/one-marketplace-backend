@@ -12,10 +12,7 @@ router.post('/signin', usersController.signIn);
 router.get('/self', authController.requireAuth, usersController.getSelf);
 
 router.get('/:id', usersController.getUser);
-
 router.get('/:id/advertisements', authController.requireAuth, usersController.getUserAdvertisements)
-
-router.get('/:id', usersController.getUser);
 router.put('/:id', authController.requireAuth, authController.isOwner, usersController.editUser);
 
 

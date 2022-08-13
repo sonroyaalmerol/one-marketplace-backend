@@ -28,4 +28,10 @@ let adSchema = new Schema(
    }
 );
 
+adSchema.index({
+    title: 'text',
+    description: 'text',
+    location: 'text'
+});
+
 module.exports = mongoose.model("Advertisement", adSchema);
