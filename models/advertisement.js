@@ -7,6 +7,11 @@ let adSchema = new Schema(
         description : String,
         location : String,
         price: Number,
+        expiresAt: Date,
+        disabled: {
+            type: Boolean,
+            default: false
+        },
         user: {
             type: Schema.Types.ObjectId,
             ref: "User",

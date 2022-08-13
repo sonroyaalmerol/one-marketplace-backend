@@ -33,6 +33,7 @@ module.exports.getCategory = (req, res, next) => {
 
 }
 
+/*
 module.exports.editCategory = (req, res, next) => {
     let id = req.params.id;
 
@@ -78,7 +79,7 @@ module.exports.deleteCategory = (req, res, next) => {
         }
     });
 }
-
+*/
 
 module.exports.getAddCategory = (req, res, next) => {
     let id = req.params.id;

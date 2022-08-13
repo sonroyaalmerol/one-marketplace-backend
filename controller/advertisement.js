@@ -1,8 +1,11 @@
 const Advertisement = require('../models/advertisement');
 
-module.exports.getAllAdvertisements = function(req,res,next)
+module.exports.getAllNonExpiredAdvertisements = function(req,res,next)
 {
-    Advertisement.find((err, ads) => 
+    Advertisement.find({
+        expiresAt: { $gt: new Date() },
+        disabled: false
+    }, (err, ads) => 
     {
         if(err)
         {
@@ -11,6 +14,21 @@ module.exports.getAllAdvertisements = function(req,res,next)
         else
         {
             res.status(200).json(ads);
+        }
+    });
+}
+
+module.exports.getAllQuestions = function(req,res,next)
+{
+    Question.find((err, questions) => 
+    {
+        if(err)
+        {
+            res.status(500).json({ error: err });
+        }
+        else
+        {
+            res.status(200).json(questions);
         }
     });
 }
@@ -30,7 +48,6 @@ module.exports.getAdvertisement = (req, res, next) => {
         }
 
     });
-
 }
 
 module.exports.editAdvertisement = (req, res, next) => {
@@ -59,7 +76,8 @@ module.exports.addAdvertisement = (req, res, next) => {
         title: req.body.title,
         location: req.body.location,
         description: req.body.description,
-        price: req.body.price
+        price: req.body.price,
+        user: req.payload._id
     }).then((ad) => {
         res.status(200).json(ad);
     }).catch((err) => {

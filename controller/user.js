@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Advertisement = require('../models/advertisement');
+
 const config = require('../config/config');
 
 const passport = require('passport');
@@ -81,6 +83,22 @@ module.exports.register = function (req, res, next) {
     });
   });
 };
+
+module.exports.getUserAdvertisements = function(req,res,next)
+{
+  let id = req.params.id;
+  Advertisement.find({ user: id }, (err, ads) => 
+  {
+      if(err)
+      {
+          res.status(500).json({ error: err });
+      }
+      else
+      {
+          res.status(200).json(ads);
+      }
+  });
+}
 
 module.exports.signIn = function (req, res, next) {
   passport.authenticate(
