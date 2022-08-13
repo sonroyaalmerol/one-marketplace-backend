@@ -8,6 +8,11 @@ let questionSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Answer",
             required: false
+        },
+        advertisement: {
+            type: Schema.Types.ObjectId,
+            ref: "Advertisement",
+            required: true
         }
    },
    {

@@ -1,4 +1,5 @@
 const Advertisement = require('../models/advertisement');
+const Question = require('../models/question');
 
 module.exports.getAllNonExpiredAdvertisements = function(req,res,next)
 {
@@ -9,26 +10,44 @@ module.exports.getAllNonExpiredAdvertisements = function(req,res,next)
     {
         if(err)
         {
-            res.status(500).json({ error: err });
+            return res.status(500).json({ error: err });
         }
         else
         {
-            res.status(200).json(ads);
+            return res.status(200).json(ads);
+        }
+    });
+}
+module.exports.getAllAnsweredQuestions = function(req,res,next)
+{
+    let id = req.params.id;
+
+    Question.find({ answer: { $ne: null }, advertisement: id }, (err, questions) => 
+    {
+        if(err)
+        {
+            return res.status(500).json({ error: err });
+        }
+        else
+        {
+            return res.status(200).json(questions);
         }
     });
 }
 
 module.exports.getAllQuestions = function(req,res,next)
 {
-    Question.find((err, questions) => 
+    let id = req.params.id;
+
+    Question.find({ advertisement: id }, (err, questions) => 
     {
         if(err)
         {
-            res.status(500).json({ error: err });
+            return res.status(500).json({ error: err });
         }
         else
         {
-            res.status(200).json(questions);
+            return res.status(200).json(questions);
         }
     });
 }
@@ -41,10 +60,10 @@ module.exports.getAdvertisement = (req, res, next) => {
         if(err)
         {
             console.log(err);
-            res.status(500).json({ error: err });
+            return res.status(500).json({ error: err });
         }
         else {
-            res.status(200).json(ad);
+            return res.status(200).json(ad);
         }
 
     });
@@ -61,12 +80,12 @@ module.exports.editAdvertisement = (req, res, next) => {
     }, (err, ad) =>{
         if(err)
         {
-            res.status(500).json({ error: err });
+            return res.status(500).json({ error: err });
             console.log(err);
         }
         else 
         {
-            res.status(200).json(ad);
+            return res.status(200).json(ad);
         }
     });
 }
@@ -79,10 +98,10 @@ module.exports.addAdvertisement = (req, res, next) => {
         price: req.body.price,
         user: req.payload._id
     }).then((ad) => {
-        res.status(200).json(ad);
+        return res.status(200).json(ad);
     }).catch((err) => {
         console.log(err);
-        res.status(500).json({ error: err });
+        return res.status(500).json({ error: err });
     });
 }
 
@@ -94,11 +113,11 @@ module.exports.deleteAdvertisement = (req, res, next) => {
         if(err)
         {
             console.log(err);
-            res.status(500).json({ error: err });
+            return res.status(500).json({ error: err });
         }
         else
         {
-            res.status(200).json(ad);
+            return res.status(200).json(ad);
         }
     });
 }

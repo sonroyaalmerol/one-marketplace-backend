@@ -6,11 +6,11 @@ module.exports.getAllCategories = function(req,res,next)
     {
         if(err)
         {
-            res.status(500).json({ error: err });
+            return res.status(500).json({ error: err });
         }
         else
         {
-            res.status(200).json(categories);
+            return res.status(200).json(categories);
         }
     });
 }
@@ -23,10 +23,10 @@ module.exports.getCategory = (req, res, next) => {
         if(err)
         {
             console.log(err);
-            res.status(500).json({ error: err });
+            return res.status(500).json({ error: err });
         }
         else {
-            res.status(200).json(category);
+            return res.status(200).json(category);
         }
 
     });
@@ -89,10 +89,10 @@ module.exports.getAddCategory = (req, res, next) => {
         if(err)
         {
             console.log(err);
-            res.status(500).json({ error: err });
+            return res.status(500).json({ error: err });
         }
         else {
-            res.status(200).json(category);
+            return res.status(200).json(category);
         }
 
     });

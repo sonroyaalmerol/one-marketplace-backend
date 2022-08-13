@@ -91,11 +91,11 @@ module.exports.getUserAdvertisements = function(req,res,next)
   {
       if(err)
       {
-          res.status(500).json({ error: err });
+        return res.status(500).json({ error: err });
       }
       else
       {
-          res.status(200).json(ads);
+        return res.status(200).json(ads);
       }
   });
 }
