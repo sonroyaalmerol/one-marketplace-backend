@@ -78,3 +78,23 @@ module.exports.deleteCategory = (req, res, next) => {
         }
     });
 }
+
+
+module.exports.getAddCategory = (req, res, next) => {
+    let id = req.params.id;
+
+    Category.find({_id:id}, (err, category) =>{
+
+        if(err)
+        {
+            console.log(err);
+            res.status(500).json({ error: err });
+        }
+        else {
+            res.status(200).json(category);
+        }
+
+    });
+
+}
+
