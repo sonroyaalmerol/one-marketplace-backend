@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const Advertisement = require('../models/advertisement');
 
 module.exports.getAllCategories = function(req,res,next)
 {
@@ -84,15 +85,18 @@ module.exports.deleteCategory = (req, res, next) => {
 module.exports.getAddCategory = (req, res, next) => {
     let id = req.params.id;
 
-    Category.find({_id:id}, (err, category) =>{
-
+    Advertisement.find({
+        category: id,
+        expiresAt: { $gt: new Date() },
+        disabled: false
+    }, (err, advertisements) =>{
         if(err)
         {
             console.log(err);
             return res.status(500).json({ error: err });
         }
         else {
-            return res.status(200).json(category);
+            return res.status(200).json(advertisements);
         }
 
     });
