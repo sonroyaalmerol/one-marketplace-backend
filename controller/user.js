@@ -149,3 +149,42 @@ module.exports.signIn = function (req, res, next) {
     }
   )(req, res, next);
 }
+
+
+module.exports.getUser = (req, res, next) => {
+  let id = req.params.id;
+
+  User.findById(id, (err, user) =>{
+      if(err)
+      {
+        console.log(err);
+        return res.status(500).json({ error: err });
+      }
+      else {
+        delete user.password;
+        
+        return res.status(200).json(user);
+      }
+  });
+}
+
+module.exports.editUser = (req, res, next) => {
+  let id = req.params.id;
+
+  User.findByIdAndUpdate(id, {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      username: req.body.username,
+  }, (err, user) =>{
+      if(err)
+      {
+          return res.status(500).json({ error: err });
+          console.log(err);
+      }
+      else 
+      {
+          return res.status(200).json(user);
+      }
+  });
+}

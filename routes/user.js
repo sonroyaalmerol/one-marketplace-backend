@@ -13,6 +13,10 @@ router.get('/self', authController.requireAuth, usersController.getSelf);
 
 router.get('/:id', usersController.getUser);
 
-router.get('/advertisements', authController.requireAuth, usersController.getUserAdvertisements)
+router.get('/:id/advertisements', authController.requireAuth, usersController.getUserAdvertisements)
+
+router.get('/:id', usersController.getUser);
+router.put('/:id', authController.requireAuth, authController.isOwner, usersController.editUser);
+
 
 module.exports = router;

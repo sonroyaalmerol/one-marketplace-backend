@@ -40,7 +40,18 @@ exports.isOwner = async function (req, res, next) {
 
     if (advertisement == null) // Item not found
     {
-      throw new Error('Item not found'); // Express catches the error.
+      let user = await UserModel.findById(id).exec();
+
+      if (user === null) {
+        throw new Error('Item not found'); // Express catches the error.
+      }
+
+      if (user._id !== req.payload.id) {
+        return res.status(403).json({
+          success: false,
+          message: 'User is not authorized to modify this item.'
+        });
+      }
     } else if (advertisement.user != null) { // Item has a owner
 
       if (advertisement.user._id != req.payload.id) {
@@ -64,5 +75,4 @@ exports.isOwner = async function (req, res, next) {
       message: getErrorMessage(error)
     });
   }
-
 }
